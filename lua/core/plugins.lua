@@ -11,6 +11,8 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+
+-- https://www.nerdfonts.com/font-downloads
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'ellisonleao/gruvbox.nvim'
