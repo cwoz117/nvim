@@ -3,7 +3,7 @@ require("mason").setup()
 -- Look for a new language server here:
 -- https://github.com/williamboman/mason-lspconfig.nvim
 require("mason-lspconfig").setup({
-  ensure_installed = {"sumneko_lua", "jedi_language_server"}
+  ensure_installed = {"lua_ls", "jedi_language_server", "dockerls"}
 })
 
 local on_attach = function(_, _)
@@ -16,10 +16,14 @@ local on_attach = function(_, _)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 end
 
-require("lspconfig").sumneko_lua.setup {
+require("lspconfig").lua_ls.setup {
 	on_attach = on_attach
 }
 
 require("lspconfig").jedi_language_server.setup {
+	on_attach = on_attach
+}
+
+require("lspconfig").dockerls.setup {
 	on_attach = on_attach
 }
