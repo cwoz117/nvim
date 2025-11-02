@@ -1,0 +1,33 @@
+setw -g mode-keys vi
+set-option -g status-position top
+set -g base-index 1
+set -g mouse on
+
+bind-key = set-window-option synchronize-panes\; display-message "synchronize panes is now #{?pane_synchronized,on,off}"
+
+#split panes using | and -
+bind | split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# Resize window hotkeys
+bind-key -r J resize-pane -D 5
+bind-key -r K resize-pane -U 5
+bind-key -r H resize-pane -L 5 
+bind-key -r L resize-pane -R 5
+
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
+
+#set -g @plugin 'nordtheme/tmux'
+set -g @plugin 'egel/tmux-gruvbox'
+set -g @tmux-gruvbox 'dark'
+
+run '~/.tmux/plugins/tpm/tpm'
