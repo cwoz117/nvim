@@ -19,6 +19,14 @@ return {
     end
   },
 
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+  },
+
   { "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim",},
     cmd = "Telescope",
@@ -50,5 +58,66 @@ return {
         "lua", "go", "python", "javascript", "typescript", "rust" },
     },
   },
-}
 
+
+  {
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach", -- lazy load on LSP attach
+    keys = function()
+      local opts = { silent = true, noremap = true }
+
+      return {
+        -- Diagnostics
+        { "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts },
+        { "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts },
+        { "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", opts },
+        { "<leader>ce", "<cmd>Lspsaga show_buf_diagnostics<CR>", opts },
+        -- Code actions
+        { "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts },
+        -- Breadcrumb toggle (toggle winbar)
+        { "<leader>tb", "<cmd>Lspsaga winbar_toggle<CR>", opts },
+      }
+    end,
+    opts = {
+      ui = {
+        border = "rounded",
+        title = true,
+        code_action = "💡", -- icon for available actions
+      },
+      lightbulb = {
+        enable = true,
+        sign = true,
+        virtual_text = false,
+      },
+      symbol_in_winbar = {
+        enable = true, -- <-- breadcrumbs
+        separator = "  ",
+        hide_keyword = true,
+        show_file = true,
+        folder_level = 1,
+        color_mode = true,
+      },
+      diagnostic = {
+        show_code_action = true,
+        jump_num_shortcut = true,
+        show_source = true,
+        max_width = 0.7,
+        max_height = 0.6,
+        keys = {
+          exec_action = "o",
+          quit = "q",
+          toggle_or_jump = "<CR>",
+        },
+      },
+      code_action = {
+        num_shortcut = true,
+        show_server_name = true,
+        extend_gitsigns = true,
+        keys = {
+          quit = "q",
+          exec = "<CR>",
+        },
+      },
+    },
+  },
+}
